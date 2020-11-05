@@ -382,7 +382,7 @@ func TestZeroSizedImages(t *testing.T) {
 	for _, r := range testsizes {
 		img := image.NewRGBA(image.Rect(0, 0, r.w, r.h))
 		var buf bytes.Buffer
-		if err := Encode(&buf, img, nil); err != nil {
+		if err := Encode(&buf, img, nil, 72); err != nil {
 			t.Errorf("encode w=%d h=%d: %v", r.w, r.h, err)
 			continue
 		}

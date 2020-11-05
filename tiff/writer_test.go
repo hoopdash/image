@@ -44,7 +44,7 @@ func TestRoundtrip(t *testing.T) {
 		}
 
 		out := new(bytes.Buffer)
-		err = Encode(out, img, rt.opts)
+		err = Encode(out, img, rt.opts, 72)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -65,7 +65,7 @@ func TestRoundtrip2(t *testing.T) {
 		m0.Pix[i] = byte(i)
 	}
 	out := new(bytes.Buffer)
-	if err := Encode(out, m0, nil); err != nil {
+	if err := Encode(out, m0, nil, 72); err != nil {
 		t.Fatal(err)
 	}
 	m1, err := Decode(&buffer{buf: out.Bytes()})
@@ -85,7 +85,7 @@ func benchmarkEncode(b *testing.B, name string, pixelSize int) {
 	b.SetBytes(int64(s.X * s.Y * pixelSize))
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		Encode(ioutil.Discard, img, nil)
+		Encode(ioutil.Discard, img, nil, 72)
 	}
 }
 
